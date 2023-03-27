@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6  p-3 mx-auto my-auto mt-3 mb-5 shadow bg-white rounded">
+      <form class="theme-form" [formGroup]="signinForm">
+
+        <!-- header -->
+        <h2 class="text-center"> {{title}}</h2>
+        <p class="mb-1"></p>
+
+        <!-- Email or Phone Number Validation -->
+
+        <div class="form-group mb-1">
+          <label class="col-form-label">Email or Phone number<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" formControlName="emailphone">
+          <div *ngIf="signinForm.get('emailphone').invalid && submitted">
+
+            <div class="error text-danger" *ngIf="signinForm.get('emailphone').hasError('required')">Email or phone
+              number is
+              required
+            </div>
+            <p class="text-danger mb-0" *ngIf="signinForm.get('emailphone').hasError('pattern')">Please enter
+              valid
+              email or phone number
+            </p>
+          </div>
+        </div>
+
+        <!-- password -->
+        <div class="form-group mb-3">
+          <div class="form-group">
+            <label class="col-form-label">Password <span class="text-danger">*</span></label>
+            <input class="form-control" [type]="passwordShow ? 'text' : 'password'" formControlName="password"
+              required="" placeholder="*********">
+            <div class="show-hide" (click)="showPassword()" *ngIf="!passwordShow"><span class="show"></span>
+            </div>
+            <div class="show-hide" (click)="showPassword()" *ngIf="passwordShow"><span class="Hide"></span>
+            </div>
+          </div>
+          <div class="errors mb-0" *ngIf="signinForm.get('password').invalid && submitted">
+            <p class="text-danger mb-0" *ngIf="f['password'].errors['required']">Please Enter Password</p>
+            <p class="text-danger mb-0" *ngIf="signinForm.get('password').hasError('minlength')"> Password must be 8
+              characters</p>
+          </div>
+        </div>
+
+
+        <div class="d-flex justify-content-center  mb-1">
+          <button type="submit" (click)="onsubmit()" class="btn btn-success  col-12 mx-auto">Login </button>
+        </div>
+
+        <!-- New User -->
+        <p class="mb-0">
+          New user?
+          <a routerLink='/register' class="ms-2">create account</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
